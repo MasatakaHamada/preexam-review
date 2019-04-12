@@ -1,0 +1,216 @@
+\documentclass{jsarticle}
+\usepackage{amsmath, amssymb} % 数学記号のパッケージ
+\usepackage{ascmac} % 囲み枠のパッケージ
+
+% ハイパーリンクに関するパッケージとその設定
+\usepackage[dvipdfmx]{hyperref}
+\usepackage{pxjahyper}
+\hypersetup{
+ colorlinks=true
+}
+
+% 定理などの番号付けに関するパッケージとその設定
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{defi}{定義}[section]
+\newtheorem{prop}[defi]{命題}
+\newtheorem{thm}[defi]{定理}
+\newtheorem{supp}[defi]{補足}
+\newtheorem{word}[defi]{用語}
+\newtheorem{ex}[defi]{例}
+\newtheorem{lem}[defi]{補題}
+
+\renewcommand\proofname{\bf 証明} % proof環境の設定変更
+
+\begin{document}
+
+% 本文
+\section{一様連続}
+
+\begin{screen}
+\fbox{1}
+$f$を開区間$(0,1)$で定義された函数とする．
+$f$が一様連続であるとは，
+\begin{quote}
+任意の$\epsilon>0$に対して，ある$\delta>0$が存在して，
+$|x-y|<\delta$となる任意の$x,y\in(0,1)$に対して，
+$|f(x)-f(y)|<\epsilon$が成り立つ
+\end{quote}
+ことである．このとき，次の問に答えよ．
+\begin{itemize}
+\item[2.]$f$が一様連続ならば有界であることを示せ．
+ここで，$f$が有界であるとは，
+\begin{quote}
+ある正実数$M>0$が存在して，任意の$x\in(0,1)$に対して，
+$|f(x)|<M$が成り立つ
+\end{quote}
+ことである．
+\end{itemize}
+\end{screen}
+
+\begin{proof}
+$f$は一様連続であるから，ある$\delta>0$が存在して，
+$|x-y|<\delta$となる任意の$x,y\in(0,1)$に対して，
+$|f(x)-f(y)|<1$が成り立つ．
+このとき，
+\[ (0,1)\subset\bigcup_{i=1}^NB(x_i,\delta)，
+ただし B(x_i,\delta):=\{x\in\mathbb{R}:|x_i-x|<\delta\} \]
+を満たす$x_1,x_2,\cdots,x_N\in(0,1)$が存在する．
+よって，任意の$x\in(0,1)$に対して，ある$i=1,2,\cdots,N$が存在して
+$|x_i-x|<\delta$が成り立つから，$M:=\max_{1\leq i\leq N}|f(x_i)|$とおくと，
+\[ |f(x)|=|f(x)-f(x_i)+f(x_i)|\leq|f(x)-f(x_i)|+|f(x_i)|<1+|f(x_i)|\leq1+M \]
+となる．従って，$f$は有界である．
+\end{proof}
+
+なお，証明にあたっては\href{https://math.stackexchange.com/questions/931887/how-to-prove-if-f-is-defined-and-uniformly-continuous-on-a-bounded-set-e-th}{こちら}を参照しました．
+
+\section{広義積分}
+
+\begin{screen}
+\fbox{2}
+次の問に答えよ．
+\begin{itemize}
+\item[2.]次の広義積分が収束することを示せ
+\[ \int_0^1\frac{1}{[x(1-x)]^{1/3}}\,dx \]
+\item[3.]次の広義積分が収束しないことを示せ：
+\[ \int_0^\infty\frac{2+\sin{e^x}}{x}\,dx \]
+\end{itemize}
+\end{screen}
+
+\begin{proof}
+\begin{itemize}
+\item[2.]広義積分が収束することの定義\footnote{\href{https://lecture.ecc.u-tokyo.ac.jp/~nkiyono/kiyono/12_kata-07.pdf}{こちら}を参照しました．}
+を確認する．
+\begin{boxnote}\begin{defi}
+$a$を実数とし，$b\in\mathbb{R}\cup\{\infty\}$とする．
+$[a,b)$に含まれる任意の有界閉区間上で可積分な関数$f$に対して，
+広義積分
+\[ \int_a^bf(x)\,dx \]
+が収束するとは，
+\[ \lim_{r\to b-0}\int_a^rf(x)\,dx \]
+が存在することをいう．
+$(a,b]$で定義された関数についても，同様に
+\[ \int_a^bf(x)\,dx=\lim_{r\to a+0}\int_r^bf(x)\,dx \]
+と定義する．
+また，$(a,b)$で定義された関数については，ある$c\in(a,b)$をとって
+\[ \int_a^bf(x)\,dx=\lim_{r\to a+0}\int_r^cf(x)\,dx+\lim_{r\to b-0}\int_c^rf(x)\,dx \]
+と定義する．
+\end{defi}\end{boxnote}
+$0<x\leq1/2$のとき，$1-x\geq1/2$であるから
+\[ \frac{1}{[x(1-x)]^{1/3}}=\frac{1}{x^{1/3}(1-x)^{1/3}}
+\leq\frac{1}{x^{1/3}(1/2)^{1/3}}=2^{1/3}x^{-1/3} \]
+となる．よって，$r_0\in(0,1/2]$に対して
+\[ \int_{r_0}^{1/2}\frac{1}{[x(1-x)]^{1/3}}\,dx
+\leq2^{1/3}\int_{r_0}^{1/2}x^{-1/3}\,dx
+=2^{1/3}\left[\frac{2}{3}x^{2/3}\right]_{r_0}^{1/2}
+=\frac{2^{2/3}[1-(2r_0)^{2/3}]}{3} \]
+であるから，$r_0\to0+0$としたとき，最左辺の積分は収束する．
+また，$1/2\leq x<1$のとき，
+\[ \frac{1}{[x(1-x)]^{1/3}}=\frac{1}{x^{1/3}(1-x)^{1/3}}
+\leq\frac{1}{(1/2)^{1/3}(1-x)^{1/3}}=2^{1/3}(1-x)^{-1/3} \]
+となる．よって，$r_1\in[1/2,1)$に対して
+\[ \int_{1/2}^{r_1}\frac{1}{[x(1-x)]^{1/3}}\,dx
+\leq2^{1/3}\int_{1/2}^{r_1}(1-x)^{-1/3}\,dx
+=2^{1/3}\left[-\frac{2}{3}(1-x)^{2/3}\right]_{1/2}^{r_1}
+=\frac{2^{4/3}}{3}[2^{-2/3}-(1-r_1)^{2/3}] \]
+であるから，$r_1\to1-0$としたとき，最左辺の積分は収束する．
+以上より，広義積分
+\[ \int_0^1\frac{1}{[x(1-x)]^{1/3}}\,dx \]
+は収束する．
+
+\item[3.]$\epsilon,M>0$とするとき
+\[ \int_\epsilon^M\frac{2+\sin{e^x}}{x}\,dx
+\geq\int_\epsilon^M\frac{2-1}{x}\,dx
+=\int_\epsilon^M\frac{1}{x}\,dx
+=\log{M}-\log{\epsilon} \]
+であり，
+\[ \lim_{M\to\infty}\log{M}=\infty，\lim_{\epsilon\to0+0}\log{\epsilon}=-\infty \]
+であるから，広義積分
+\[ \int_0^\infty\frac{2+\sin{e^x}}{x}\,dx \]
+は収束しない．
+\end{itemize}
+\end{proof}
+
+なお，2の証明にあたっては友人の解答を参照しました．
+感謝申し上げます．
+
+\section{線形部分空間}
+
+\begin{screen}
+\fbox{3}
+$V$と$W$を$d$次元実線型空間$\mathbb{R}^d$の部分空間とする．
+\begin{itemize}
+\item[3.]和集合$V\cup W$は$\mathbb{R}^d$の部分空間となるか？
+理由とともに答えよ．
+\end{itemize}
+\end{screen}
+
+$V\cup W$は，
+$d=1$のとき$\mathbb{R}^d$の部分空間となり，
+$d>1$のとき$\mathbb{R}^d$の部分空間であるとは限らない．
+
+\begin{proof}
+$d=1$のとき，$\dim{V},\dim{W}\leq1$であるから，
+$V$も$W$も$\{0\}$または$\mathbb{R}$のいずれかである．
+よって$V\cup W$も$\{0\}$または$\mathbb{R}$のいずれかである．
+従って，$V\cup W$は$\mathbb{R}$の部分空間である．
+
+$d>1$のとき，例えば
+$V=\{(x_1,\cdots,x_d)\in\mathbb{R}^d:x_1=0\}$，
+$W=\{(x_1,\cdots,x_d)\in\mathbb{R}^d:x_2=0\}$
+とすると，$V\cup W$は$\mathbb{R}^d$の部分空間ではない．
+実際，$ab\neq0$を満たす$a,b\in\mathbb{R}$に対して，
+$(a,0,0,\cdots,0)\in V\subset V\cup W$，$(0,b,0,\cdots,0)\in W\subset V\cup W$
+であるが，
+$(a,0,0,\cdots,0)+(0,b,0,\cdots,0)=(a,b,0,\cdots,0)\notin V\cup W$
+となる．従って，$V\cup W$は$\mathbb{R}^d$の部分空間であるとは限らない．
+\end{proof}
+
+上記の証明において用いられている以下の事実も証明しておこう．
+
+\begin{prop}
+$V$を有限次元線形空間，$W$を$V$の部分空間とするとき，次が成り立つ．
+\begin{enumerate}
+\item $\dim{W}\leq\dim{V}$
+\item $\dim{W}=\dim{V}$ならば$W=V$
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+後でやる．
+\end{proof}
+
+\section{固有空間}
+
+\begin{screen}
+\fbox{4}
+二次以下の実数係数多項式の全体からなる実線型空間を$V$として，
+$V$上の線型変換$D\colon V\to V$を
+\[ f(x)\mapsto\frac{d}{dx}[(1+x)f(x)] \]
+と定める．このとき，次の問に答えよ．
+\begin{itemize}
+\item[3.]$D$の固有空間の全てについて，それぞれの基底を一組ずつ求めよ．
+\end{itemize}
+\end{screen}
+
+固有空間の定義を再確認しよう．
+
+\begin{boxnote}\begin{defi}
+$V$を$K$線形空間，$T: V\to V$を$V$上の線形変換とする．
+0でない$v\in V$が$T$の固有ベクトルであるとは，
+ある$\lambda\in K$が存在して$T(v)=\lambda v$が成り立つことをいう．
+このとき，$\lambda$を固有ベクトル$v$に関する固有値といい，さらに
+\[ W_\lambda:=\{w\in V:T(w)=\lambda w\} \]
+によって定義される線形空間$W_\lambda$を，固有値$\lambda$に関する固有空間と呼ぶ．
+\end{defi}\end{boxnote}
+
+従って，$D$の表現行列を用いて$V$を$\mathbb{R}^3$とみなして考えたときの固有空間は，
+$D$の固有空間そのものではないことに注意しよう．
+$V$を$\mathbb{R}^3$とみなして考えたとき，固有値1,2,3に関する固有空間の基底の1つは，それぞれ
+\[ \begin{pmatrix}1\\0\\0\end{pmatrix},\begin{pmatrix}1\\1\\0\end{pmatrix},
+\begin{pmatrix}1\\2\\1\end{pmatrix} \]
+であるから，対応する$D$の固有空間の基底は，それぞれ
+\[ 1,1+(1+2x),1+2(1+2x)+(2x+3x^2) \]
+である．
+
+\end{document}
