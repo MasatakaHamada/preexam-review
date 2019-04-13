@@ -1,0 +1,413 @@
+\documentclass{jsarticle}
+\usepackage{amsmath, amssymb} % 数学記号のパッケージ
+\usepackage{ascmac} % 囲み枠のパッケージ
+
+% ハイパーリンクに関するパッケージとその設定
+\usepackage[dvipdfmx]{hyperref}
+\usepackage{pxjahyper}
+\hypersetup{
+ colorlinks=true
+}
+
+% 定理などの番号付けに関するパッケージとその設定
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{defi}{定義}[section]
+\newtheorem{prop}[defi]{命題}
+\newtheorem{thm}[defi]{定理}
+\newtheorem{supp}[defi]{補足}
+\newtheorem{word}[defi]{用語}
+\newtheorem{ex}[defi]{例}
+\newtheorem{lem}[defi]{補題}
+
+\renewcommand\proofname{\bf 証明} % proof環境の設定変更
+
+% タイトルなど
+\title{2019年度予備テスト　解答と補足}
+\author{Masataka HAMADA}
+
+\begin{document}
+\maketitle
+
+% 本文
+\section{関数の一様連続性}
+\subsection{問題と解答}
+
+\begin{screen}
+\fbox{1}
+$f$を開区間$(0,1)$で定義された函数とする．
+$f$が一様連続であるとは，
+\begin{quote}
+任意の$\epsilon>0$に対して，ある$\delta>0$が存在して，
+$|x-y|<\delta$となる任意の$x,y\in(0,1)$に対して，
+$|f(x)-f(y)|<\epsilon$が成り立つ
+\end{quote}
+ことである．このとき，次の問に答えよ．
+\begin{enumerate}
+\item$f(x)=\sin(1/x)$とするとき，$f$は一様連続か？
+理由とともに答えよ．
+\item$f$が一様連続ならば有界であることを示せ．
+ここで，$f$が有界であるとは，
+\begin{quote}
+ある正実数$M>0$が存在して，任意の$x\in(0,1)$に対して，
+$|f(x)|<M$が成り立つ
+\end{quote}
+ことである．
+\item$f$が一様連続ならば，$x_n\in(0,1)$かつ
+$\lim_{n\to\infty}x_n=0$となる任意の数列$\{x_n\}_{n=1}^\infty$に対して，
+$\{f(x_n)\}_{n=1}^\infty$がコーシー列になることを示せ．
+\end{enumerate}
+\end{screen}
+
+\begin{enumerate}
+\item$f$は一様連続でない．
+実際，$\epsilon=1$とすると，任意の$\delta>0$に対して
+\[ \left|\frac{1}{(2n+1/6)(2n+7/6)\pi}\right|<\delta \]
+を満たす自然数$n$をとって$x=[(2n+1/6)\pi]^{-1},y=[(2n+7/6)\pi]^{-1}$
+とおけば，$x,y\in(0,1)$であり，
+\[ |x-y|=\left|\frac{1}{(2n+1/6)(2n+7/6)\pi}\right|<\delta \]
+かつ
+\[ |f(x)-f(y)|
+=\left|\sin\left(2n+\frac{1}{6}\right)\pi-\sin\left(2n+\frac{7}{6}\right)\pi\right|
+=\left|\frac{1}{2}+\frac{1}{2}\right|=1\geq\epsilon \]
+となる．
+
+\item$f$は一様連続であるから，ある$\delta>0$が存在して，
+$|x-y|<\delta$となる任意の$x,y\in(0,1)$に対して，
+$|f(x)-f(y)|<1$が成り立つ．
+このとき，
+\[ (0,1)\subset\bigcup_{i=1}^NB(x_i,\delta)，
+ただし B(x_i,\delta):=\{x\in\mathbb{R}:|x_i-x|<\delta\} \]
+を満たす$x_1,x_2,\cdots,x_N\in(0,1)$が存在する．
+よって，任意の$x\in(0,1)$に対して，ある$i=1,2,\cdots,N$が存在して
+$|x_i-x|<\delta$が成り立つから，$M:=\max_{1\leq i\leq N}|f(x_i)|$とおくと，
+\[ |f(x)|=|f(x)-f(x_i)+f(x_i)|\leq|f(x)-f(x_i)|+|f(x_i)|<1+|f(x_i)|\leq1+M \]
+となる．従って，$f$は有界である．
+
+\item 任意の$\epsilon>0$に対して，$f$が一様連続であることから，
+ある$\delta>0$が存在して，$|x-y|<\delta$となる任意の$x,y\in(0,1)$に対して
+$|f(x)-f(y)|<\epsilon$となる．さらに$\lim_{n\to\infty}x_n=0$なので，
+ある自然数$N$が存在して，$n\geq N$となる任意の自然数$n$に対し
+$|x_n|<\delta/2$となる．このとき，$m,n\geq N$となる任意の自然数$m,n$について
+$|x_m-x_n|\leq|x_m|+|x_n|<\delta/2+\delta/2=\delta$となるから
+$|f(x_m)-f(x_n)|<\epsilon$であることが従う．
+以上より，$\{f(x_n)\}_{n=1}^\infty$はコーシー列である．
+\end{enumerate}
+
+\subsection{補足}
+
+\begin{enumerate}
+\item$f$が一様連続でない，すなわち一様連続であることの定義の否定は
+\begin{quote}
+ある$\epsilon>0$が存在し，任意の$\delta>0$に対して，
+$|x-y|<\delta$かつ$|f(x)-f(y)|\geq\epsilon$となる$x,y\in(0,1)$が存在する
+\end{quote}
+となります．
+
+\item 証明にあたっては\href{https://math.stackexchange.com/questions/931887/how-to-prove-if-f-is-defined-and-uniformly-continuous-on-a-bounded-set-e-th}{こちら}を参照しました．
+
+\item 実数列$\{x_n\}_{n=1}^\infty$がコーシー列であるとは，
+\begin{quote}
+任意の$\epsilon>0$に対して，ある自然数$N$が存在して，
+$m,n\geq N$となる任意の自然数$m,n$に対して
+$|x_m-x_n|<\epsilon$が成り立つ
+\end{quote}
+ことです．
+\end{enumerate}
+
+\section{広義積分}
+\subsection{問題と解答}
+
+\begin{screen}
+\fbox{2}
+次の問に答えよ．
+\begin{enumerate}
+\item 次の広義積分が収束するための実数$p$の充たすべき必要十分条件を求めよ：
+\[ \int_0^1(1-x)^p\,dx \]
+\item 次の広義積分が収束することを示せ
+\[ \int_0^1\frac{1}{[x(1-x)]^{1/3}}\,dx \]
+\item 次の広義積分が収束しないことを示せ：
+\[ \int_0^\infty\frac{2+\sin{e^x}}{x}\,dx \]
+\end{enumerate}
+\end{screen}
+
+\begin{enumerate}
+\item$p>-1$のとき，
+\[ \int_0^1(1-x)^p\,dx=\left[-\frac{(1-x)^{p+1}}{p+1}\right]_0^1=\frac{1}{p+1} \]
+となる．
+
+$p=-1$のとき，$0<\epsilon<1$に対して
+\[ \int_0^\epsilon(1-x)^p\,dx=\left[-\log(1-x)\right]_0^\epsilon=-\log(1-\epsilon) \]
+となるが，$\lim_{x\to0+0}\log{x}=-\infty$であるから
+$\lim_{\epsilon\to1-0}[-\log(1-\epsilon)]=\infty$である．つまり，広義積分
+\[ \int_0^1(1-x)^p\,dx \]
+は発散する．
+
+$p<-1$のとき，$0<\epsilon<1$に対して
+\[ \int_0^\epsilon(1-x)^p\,dx=\left[-\frac{(1-x)^{p+1}}{p+1}\right]_0^\epsilon
+=-\frac{(1-\epsilon)^{p+1}}{p+1}+\frac{1}{p+1} \]
+となるが，$\lim_{x\to0+0}x^{p+1}=\infty$であるから
+$\lim_{\epsilon\to1-0}[-\frac{(1-\epsilon)^{p+1}}{p+1}+\frac{1}{p+1}]=-\infty$であるから，
+広義積分
+\[ \int_0^1(1-x)^p\,dx \]
+は発散する．
+従って，広義積分
+\[ \int_0^1(1-x)^p\,dx \]
+が収束するための実数$p$の充たすべき必要十分条件は$p>-1$である．
+
+\item$0<x\leq1/2$のとき，$1-x\geq1/2$であるから
+\[ \frac{1}{[x(1-x)]^{1/3}}=\frac{1}{x^{1/3}(1-x)^{1/3}}
+\leq\frac{1}{x^{1/3}(1/2)^{1/3}}=2^{1/3}x^{-1/3} \]
+となる．よって，$r_0\in(0,1/2]$に対して
+\[ \int_{r_0}^{1/2}\frac{1}{[x(1-x)]^{1/3}}\,dx
+\leq2^{1/3}\int_{r_0}^{1/2}x^{-1/3}\,dx
+=2^{1/3}\left[\frac{2}{3}x^{2/3}\right]_{r_0}^{1/2}
+=\frac{2^{2/3}[1-(2r_0)^{2/3}]}{3} \]
+であるから，$r_0\to0+0$としたとき，最左辺の積分は収束する．
+また，$1/2\leq x<1$のとき，
+\[ \frac{1}{[x(1-x)]^{1/3}}=\frac{1}{x^{1/3}(1-x)^{1/3}}
+\leq\frac{1}{(1/2)^{1/3}(1-x)^{1/3}}=2^{1/3}(1-x)^{-1/3} \]
+となる．よって，$r_1\in[1/2,1)$に対して
+\[ \int_{1/2}^{r_1}\frac{1}{[x(1-x)]^{1/3}}\,dx
+\leq2^{1/3}\int_{1/2}^{r_1}(1-x)^{-1/3}\,dx
+=2^{1/3}\left[-\frac{2}{3}(1-x)^{2/3}\right]_{1/2}^{r_1}
+=\frac{2^{4/3}}{3}[2^{-2/3}-(1-r_1)^{2/3}] \]
+であるから，$r_1\to1-0$としたとき，最左辺の積分は収束する．
+以上より，広義積分
+\[ \int_0^1\frac{1}{[x(1-x)]^{1/3}}\,dx \]
+は収束する．
+
+\item$\epsilon,M>0$とするとき
+\[ \int_\epsilon^M\frac{2+\sin{e^x}}{x}\,dx
+\geq\int_\epsilon^M\frac{2-1}{x}\,dx
+=\int_\epsilon^M\frac{1}{x}\,dx
+=\log{M}-\log{\epsilon} \]
+であり，
+\[ \lim_{M\to\infty}\log{M}=\infty，\lim_{\epsilon\to0+0}\log{\epsilon}=-\infty \]
+であるから，広義積分
+\[ \int_0^\infty\frac{2+\sin{e^x}}{x}\,dx \]
+は収束しない．
+\end{enumerate}
+
+\subsection{補足}
+
+広義積分が収束することの定義は次の通りです．
+\begin{defi}
+$a$を実数とし，$b\in\mathbb{R}\cup\{\infty\}$とする．
+$[a,b)$に含まれる任意の有界閉区間上で可積分な関数$f$に対して，
+広義積分
+\[ \int_a^bf(x)\,dx \]
+が収束するとは，
+\[ \lim_{r\to b-0}\int_a^rf(x)\,dx \]
+が存在することをいう．
+$(a,b]$で定義された関数についても，同様に
+\[ \int_a^bf(x)\,dx=\lim_{r\to a+0}\int_r^bf(x)\,dx \]
+と定義する．
+また，$(a,b)$で定義された関数については，ある$c\in(a,b)$をとって
+\[ \int_a^bf(x)\,dx=\lim_{r\to a+0}\int_r^cf(x)\,dx+\lim_{r\to b-0}\int_c^rf(x)\,dx \]
+と定義する．
+\end{defi}
+
+なお，2の証明にあたっては友人の解答を参照しました．
+感謝申し上げます．
+
+\section{線形部分空間}
+\subsection{問題と解答}
+
+\begin{screen}
+\fbox{3}
+$V$と$W$を$d$次元実線型空間$\mathbb{R}^d$の部分空間とする．
+和$V+W$と交わり$V\cap W$も$\mathbb{R}^d$の部分空間となる．
+$\mathbb{R}^d$の元$u_1,\cdots,u_\ell,v_1,\cdots,v_m,w_1,\cdots,w_n$を次のように選ぶ：
+\begin{itemize}
+\item$u_1,\cdots,u_\ell$は$V\cap W$の基底である．
+\item$u_1,\cdots,u_\ell,v_1,\cdots,v_m$は$V$の基底である．
+\item$u_1,\cdots,u_\ell,w_1,\cdots,w_n$は$W$の基底である．
+\end{itemize}
+このとき，次の問に答えよ．
+\begin{enumerate}
+\item 和$V+W$の任意の元が$u_1,\cdots,u_\ell,v_1,\cdots,v_m,w_1,\cdots,w_n$の
+線型結合で表されることを示せ．
+\item 元$u_1,\cdots,u_\ell,v_1,\cdots,v_m,w_1,\cdots,w_n$は線型独立であることを示せ．
+\item 和集合$V\cup W$は$\mathbb{R}^d$の部分空間となるか？
+理由とともに答えよ．
+\end{enumerate}
+\end{screen}
+
+\begin{enumerate}
+\item 任意の$v\in V,w\in W$は，
+ある$a_1,\cdots,a_{\ell+m},b_1,\cdots,b_{\ell+n}\in\mathbb{R}$を用いて
+\[ v=\sum_{i=1}^\ell a_iu_i+\sum_{j=1}^ma_{\ell+j}v_j，
+w=\sum_{i=1}^\ell b_iu_i+\sum_{k=1}^nb_{\ell+k}w_k \]
+と表すことができ，このとき
+\[ v+w=\sum_{i=1}^\ell(a_i+b_i)u_i+\sum_{j=1}^ma_{\ell+j}v_j+\sum_{k=1}^nb_{\ell+k}w_k \]
+となる．
+従って，$V+W$の任意の元は$u_1,\cdots,u_\ell,v_1,\cdots,v_m,w_1,\cdots,w_n$の
+線型結合で表される．
+
+\item$a_1,\cdots,a_\ell,b_1,\cdots,b_m,c_1,\cdots,c_n\in\mathbb{R}$に対し
+\begin{equation}\label{3-1}
+\sum_{i=1}^\ell a_iu_i+\sum_{j=1}^mb_jv_j+\sum_{k=1}^nc_kw_k=0
+\end{equation}
+であるとする．このとき
+\[ v=\sum_{i=1}^\ell a_iu_i+\sum_{j=1}^mb_jv_j \]
+とおくと，$v\in V$である．さらに，(\ref{3-1})より
+\[ v=-\sum_{k=1}^nc_kw_k=\sum_{k=1}^n(-c_k)w_k \]
+であるから$v\in W$である．よって$v\in V\cap W$であるから，
+$v=d_1u_1+\cdots+d_\ell u_\ell$となる$d_1,\cdots,d_\ell\in\mathbb{R}$が存在する．つまり
+\[ \sum_{i=1}^\ell a_iu_i+\sum_{j=1}^mb_jv_j=\sum_{i=1}^\ell d_iu_i \]
+であるから
+\begin{equation}\label{3-2}
+\sum_{i=1}^\ell(a_i-d_i)u_i+\sum_{j=1}^mb_jv_j=0
+\end{equation}
+となる．ここで，$u_1,\cdots,u_\ell,v_1,\cdots,v_m$は線型独立であるから，
+(\ref{3-2})より特に$b_1=\cdots=b_m=0$である．よって(\ref{3-1})は
+\[ \sum_{i=1}^\ell a_iu_i+\sum_{k=1}^nc_kw_k=0 \]
+となるが，$u_1,\cdots,u_\ell,w_1,\cdots,w_n$も線型独立であるから，これより
+$a_1=\cdots=a_\ell=c_1=\cdots=c_n=0$である．
+
+以上より，$u_1,\cdots,u_\ell,v_1,\cdots,v_m,w_1,\cdots,w_n$は線型独立である．
+
+\item$d=1$のとき，$\dim{V},\dim{W}\leq1$であるから，
+$V$も$W$も$\{0\}$または$\mathbb{R}$のいずれかである．
+よって$V\cup W$も$\{0\}$または$\mathbb{R}$のいずれかである．
+従って，$V\cup W$は$\mathbb{R}$の部分空間である．
+
+$d>1$のとき，例えば
+$V=\{(x_1,\cdots,x_d)\in\mathbb{R}^d:x_1=0\}$，
+$W=\{(x_1,\cdots,x_d)\in\mathbb{R}^d:x_2=0\}$
+とすると，$V\cup W$は$\mathbb{R}^d$の部分空間ではない．
+実際，$ab\neq0$を満たす$a,b\in\mathbb{R}$に対して，
+$(a,0,0,\cdots,0)\in V\subset V\cup W$，$(0,b,0,\cdots,0)\in W\subset V\cup W$
+であるが，
+$(a,0,0,\cdots,0)+(0,b,0,\cdots,0)=(a,b,0,\cdots,0)\notin V\cup W$
+となる．従って，$V\cup W$は$\mathbb{R}^d$の部分空間であるとは限らない．
+
+以上より，$V\cup W$は，
+$d=1$のとき$\mathbb{R}^d$の部分空間となり，
+$d>1$のとき$\mathbb{R}^d$の部分空間であるとは限らない．
+\end{enumerate}
+
+\subsection{補足}
+
+3の解答では次の命題の1を用いています．
+
+\begin{prop}\label{dim}
+$V$を有限次元線形空間，$W$を$V$の部分空間とするとき，次が成り立つ．
+\begin{enumerate}
+\item $W$も有限次元であり，$\dim{W}\leq\dim{V}$
+\item $\dim{W}=\dim{V}$ならば$W=V$
+\end{enumerate}
+\end{prop}
+
+証明は，例えば
+\href{http://www.utp.or.jp/book/b305671.html}{「線形代数の世界」(斎藤毅，東京大学出版会，2007)}の1.5節
+を参照してください．
+
+\section{核と像，表現行列，固有空間}
+\subsection{問題と解答}
+
+\begin{screen}
+\fbox{4}
+二次以下の実数係数多項式の全体からなる実線型空間を$V$として，
+$V$上の線型変換$D\colon V\to V$を
+\[ f(x)\mapsto\frac{d}{dx}[(1+x)f(x)] \]
+と定める．このとき，次の問に答えよ．
+\begin{enumerate}
+\item$\mathrm{Ker}\,D$と$\mathrm{Im}\,D$を求めよ．
+\item$V$の基底$\{1,1+2x,2x+3x^2\}$に関する$D$の表現行列を求めよ．
+\item$D$の固有空間の全てについて，それぞれの基底を一組ずつ求めよ．
+\end{enumerate}
+\end{screen}
+
+\begin{enumerate}
+\item$a,b,c\in\mathbb{R}$とし，$f(x)=ax^2+bx+c\in V$とすると
+\[ (Df)(x)=\frac{d}{dx}[(1+x)(ax^2+bx+c)]=3ax^2+2(a+b)x+b+c \]
+となる．ここで
+\[ \begin{cases}3a&=0 \\ 2(a+b)&=0 \\ b+c&=0\end{cases} \]
+の解は$a=b=c=0$であるから，$\mathrm{Ker}\,D=\{0\}$である．
+
+また，$\mathrm{Im}\,D=V$である．実際，任意の$f\in V$が
+$p,q,r\in\mathbb{R}$を用いて$f(x)=px^2+qx+r$と表されるとき，
+\[ a=\frac{p}{3}，b=\frac{q}{2}-\frac{p}{3}，c=r-\frac{q}{2}+\frac{p}{3} \]
+とおけば
+\[ f(x)=3ax^2+2(a+b)x+b+c=(D(ax^2+bx+c))(x) \]
+となるから$f\in\mathrm{Im}\,D$である．
+
+\item1での計算結果を用いて
+\begin{itemize}
+\item$(D1)(x)=1=1\cdot1+0\cdot(1+2x)+0\cdot(2x+3x^2)$
+\item$(D(1+2x))(x)=4x+3=1\cdot1+2\cdot(1+2x)+0\cdot(2x+3x^2)$
+\item$(D(2x+3x^2))(x)=9x^2+10x+2=0\cdot1+2\cdot(1+2x)+3\cdot(2x+3x^2)$
+\end{itemize}
+であることがわかる．
+従って，$V$の基底$\{1,1+2x,2x+3x^2\}$に関する$D$の表現行列は
+\[ \begin{pmatrix}1&1&0 \\ 0&2&2 \\ 0&0&3\end{pmatrix} \]
+である．
+
+\item2の表現行列を$A$とする．$A$の固有多項式$\phi(x)$は
+\[ \phi(x)
+=\begin{vmatrix}x-1&-1&0 \\ 0&x-2&-2 \\ 0&0&x-3\end{vmatrix}
+=(x-1)\begin{vmatrix}x-2&-2 \\ 0&x-3\end{vmatrix}
+=(x-1)(x-2)(x-3) \]
+であるから，$A$の固有値は1,2,3である．
+以下，$x=\begin{pmatrix}x_1 \\ x_2 \\ x_3\end{pmatrix}\in\mathbb{R}^3$とする．
+
+\[ Ax=x\Leftrightarrow
+\begin{cases}x_1+x_2&=x_1 \\ 2x_2+2x_3&=x_2 \\ 3x_3&=x_3\end{cases}
+\Leftrightarrow\begin{cases}x_1\in\mathbb{R} \\ x_2=x_3=0\end{cases} \]
+であるから，固有値1に関する固有空間の基底の1つは1である．
+
+\[ Ax=2x\Leftrightarrow
+\begin{cases}x_1+x_2&=2x_1 \\ 2x_2+2x_3&=2x_2 \\ 3x_3&=2x_3\end{cases}
+\Leftrightarrow\begin{cases}x_1=x_2 \\ x_3=0\end{cases} \]
+であるから，固有値2に関する固有空間の基底の1つは$1+(1+2x)$である．
+
+\[ Ax=3x\Leftrightarrow
+\begin{cases}x_1+x_2&=3x_1 \\ 2x_2+2x_3&=3x_2 \\ 3x_3&=3x_3\end{cases}
+\Leftrightarrow\begin{cases}x_1=x_3 \\ x_2=2x_1\end{cases} \]
+であるから，固有値3に関する固有空間の基底の1つは$1+2(1+2x)+(2x+3x^2)$である．
+\end{enumerate}
+
+\subsection{補足}
+
+\begin{enumerate}
+\item(別解)命題\ref{dim}と次の命題を用いると，$\mathrm{Ker}\,D=\{0\}$であることから
+$\mathrm{Im}\,D=V$が直ちに従います．
+
+\begin{prop}
+有限次元線形空間$V,W$および線形変換$f\colon V\to W$に対し，
+次の等式が成り立つ：
+\[ \dim{V}=\dim\mathrm{Ker}\,f+\mathrm{rank}\,f \]
+\end{prop}
+
+証明は，例えば
+\href{http://www.utp.or.jp/book/b302039.html}{「線型代数入門」(齋藤正彦，東京大学出版会，1966)}の第4章\S4[4.5]
+や
+\href{http://www.utp.or.jp/book/b305671.html}{「線形代数の世界」(斎藤毅，東京大学出版会，2007)}の2.4節
+を参照してください．
+
+\item 特にありません．
+
+\item 固有空間の定義は次の通りです．
+
+\begin{defi}
+$V$を$K$線形空間，$T: V\to V$を$V$上の線形変換とする．
+0でない$v\in V$が$T$の固有ベクトルであるとは，
+ある$\lambda\in K$が存在して$T(v)=\lambda v$が成り立つことをいう．
+このとき，$\lambda$を固有ベクトル$v$に関する固有値といい，さらに
+\[ W_\lambda:=\{w\in V:T(w)=\lambda w\} \]
+によって定義される線形空間$W_\lambda$を，固有値$\lambda$に関する固有空間と呼ぶ．
+\end{defi}
+
+従って，$D$の表現行列を用いて$V$を$\mathbb{R}^3$とみなして考えたときの固有空間は，
+$D$の固有空間そのものではありません．
+$V$を$\mathbb{R}^3$とみなして考えたとき，固有値1,2,3に関する固有空間の基底の1つは，それぞれ
+\[ \begin{pmatrix}1\\0\\0\end{pmatrix},\begin{pmatrix}1\\1\\0\end{pmatrix},
+\begin{pmatrix}1\\2\\1\end{pmatrix} \]
+なので，対応する$D$の固有空間の基底は，それぞれ
+\[ 1,1+(1+2x),1+2(1+2x)+(2x+3x^2) \]
+となります．
+\end{enumerate}
+
+\end{document}
