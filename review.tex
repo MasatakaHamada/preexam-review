@@ -168,17 +168,108 @@ $(a,0,0,\cdots,0)+(0,b,0,\cdots,0)=(a,b,0,\cdots,0)\notin V\cup W$
 
 上記の証明において用いられている以下の事実も証明しておこう．
 
-\begin{prop}
+\begin{prop}\label{dim}
 $V$を有限次元線形空間，$W$を$V$の部分空間とするとき，次が成り立つ．
 \begin{enumerate}
-\item $\dim{W}\leq\dim{V}$
+\item $W$も有限次元であり，$\dim{W}\leq\dim{V}$
 \item $\dim{W}=\dim{V}$ならば$W=V$
 \end{enumerate}
 \end{prop}
 
+命題\ref{dim}を証明するために，いくつかの定理や補題を述べる．
+
+\begin{thm}\label{basis}
+$V$を線形空間，$x_1,\cdots,x_n\in V$を$V$の生成系とする．
+$0\leq m\leq n$とし，$x_1,\cdots,x_m$は線形独立であるとする．
+このとき，$x_1,\cdots,x_m,x_{i_1},\cdots,x_{i_r}$が$V$の基底となるような
+$m<i_1<\cdots<i_r\leq n$が存在する．
+\end{thm}
+
+\begin{lem}\label{lem1}
+$V$を線形空間とする．
+$x_1,\cdots,x_m\in V$が線形独立であるとし，
+$y_1,\cdots,y_n\in V$を$V$の生成系とする．
+このとき$V$は有限次元であり，$m\leq\dim{V}\leq n$である．
+$m=\dim{V}$ならば$x_1,\cdots,x_m$は$V$の基底であり，
+$n=\dim{V}$ならば$y_1,\cdots,y_n$は$V$の基底である．
+\end{lem}
+
 \begin{proof}
-後でやる．
+$x_1,\cdots,x_m,y_1,\cdots,y_n$は$V$の生成系であるから，
+定理\ref{basis}より$x_1,\cdots,x_m,y_{j_1},\cdots,y_{j_s}$が$V$の基底となるような
+$1\leq j_1<\cdots<j_s\leq n$が存在する．
+よって，$V$は有限次元であり$m\leq m+s=\dim{V}$が成り立つ．
+$m=\dim{V}$ならば$s=0$で，$x_1,\cdots,x_m$は$V$の基底となる．
+
+0個の元は線形独立であるから，定理\ref{basis}より
+$y_{i_1},\cdots,y_{i_r}$が$V$の基底となるような
+$1\leq i_1<\cdots<i_r\leq n$が存在する．
+よって$n\geq r=\dim{V}$である．
+$n=\dim{V}$ならば$n=r$ゆえ$\{i_1,\cdots,i_r\}=\{1,\cdots,n\}$であるから，
+$y_1,\cdots,y_n$は$V$の基底である．
 \end{proof}
+
+\begin{lem}\label{lem2}
+$V$を線形空間とする．
+\begin{enumerate}
+\item 次の条件は同値である．
+\begin{itemize}
+\item[(1)]$V$は有限次元である．
+\item[(2)]$V$の生成系で，有限個の元からなるものが存在する．
+\item[(3)]自然数$n$で，$x_1,\cdots,x_m\in V$が線形独立ならば$m\leq n$となるものが存在する．
+\end{itemize}
+\item $V$が有限次元であるとし，$n=\dim{V}$とする．
+$x_1,\cdots,x_m\in V$に対し，次の条件は同値である．
+\begin{itemize}
+\item[(1)]$x_1,\cdots,x_m$は$V$の基底である．
+\item[(2)]$x_1,\cdots,x_m$は$V$の生成系で，$m=n$である．
+\item[(3)]$x_1,\cdots,x_m$は線形独立で，$m=n$である．
+\end{itemize}
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+\begin{enumerate}
+\item(1)$\Rightarrow$(2)：
+$x_1,\cdots,x_n$を$V$の基底とすると，これは$V$の生成系である．
+
+(2)$\Rightarrow$(3)：
+$y_1,\cdots,y_n\in V$を$V$の生成系とする．
+$x_1,\cdots,x_m\in V$が線形独立ならば，補題\ref{lem1}より$m\leq n$である．
+
+(3)$\Rightarrow$(1)：
+$m\leq n$を$V$の線形独立な元の個数の最大値とし，
+$x_1,\cdots,x_m\in V$が線形独立であるとする．
+$x_1,\cdots,x_m$が$V$の生成系であることを背理法により示そう．
+もし$x_1,\cdots,x_m$の線形結合で表せない$x\in V$が存在したとすると，
+$x_1,\cdots,x_m,x$は線形独立となる．
+ところが，これは$m$が$V$の線形独立な元の個数の最大値であることに矛盾する．
+\item(1)$\Rightarrow$(2)：
+$V$の基底および次元の定義から従う．
+
+(2)$\Rightarrow$(1)：
+補題\ref{lem1}より従う．
+\end{enumerate}
+\end{proof}
+
+命題\ref{dim}を証明しよう．
+
+\begin{proof}
+\begin{enumerate}
+\item$n=\dim{V}$とする．$x_1,\cdots,x_m\in W\subset V$が線形独立ならば，
+補題\ref{lem1}より$m\leq n$である．
+よって，補題\ref{lem2}.1より$W$は有限次元である．
+$x_1,\cdots,x_m$が$W$の基底ならば，特に線形独立なので$m\leq n$であり，
+従って$\dim{W}\leq\dim{V}$が成り立つ．
+\item$x_1,\cdots,x_m$を$W$の基底とすると，
+補題\ref{lem2}.2より，$m=\dim{V}$であることは$x_1,\cdots,x_m$が$V$の基底であることと同値である．
+すなわち$\dim{W}=\dim{V}$と$W=V$は同値である．
+\end{enumerate}
+\end{proof}
+
+以上の証明にあたっては
+\href{http://www.utp.or.jp/book/b305671.html}{「線形代数の世界」(斎藤毅，東京大学出版会，2007)}
+を参照しました．
 
 \section{固有空間}
 
